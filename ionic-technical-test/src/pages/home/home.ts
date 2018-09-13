@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { PostPage } from '../post/post';
+import { PostServiceProvider } from '../../providers/post-service';
+
 
 @Component({
   selector: 'page-home',
@@ -9,49 +12,41 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
 
-  data: string;
+  Post = PostPage;
   myValue: Boolean = false;
   readmore = false;
+  postsList = [];
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public http: Http, private PostService: PostServiceProvider) {
+
     /*************************************Get all the posts  *********************************************************/
     this.getPosts();
   }
-  /*************************************The read more button function  *************************************************/
 
+  /*************************************The read more button function  ***********************************************/
   Readmore() {
-    /****************************readmore gets true if the button is clicked  ***************************************/
+    /****************************readmore gets true if the button is clicked  ****************************************/
     this.readmore = true;
   }
 
-
   /***********************************API GET all the posts  *********************************************************/
   getPosts() {
-    this.http.get(' https://jsonplaceholder.typicode.com/posts').map(res => res.json())
-      .subscribe(data => {
-        this.data = data;
-        console.log(data);
-      },
-        err => {
-          console.log("err!");
-        }
-      );
-
-  }
-  /***********************************API GET post by ID  *********************************************************/
-
-  getPost(id) {
-    this.http.get(' https://jsonplaceholder.typicode.com/post/' + id).map(res => res.json())
-      .subscribe(data => {
-        this.data = data;
-        console.log(data);
-      },
-        err => {
-          console.log("err!");
-        }
-      );
+    this.PostService.getPosts().subscribe(posts => {
+      this.postsList = posts;
+      console.log(posts);
+    },
+      err => {
+        console.log("err!");
+      }
+    );
   }
 
-
+  /***********************************Push the Id to the PostPage  *************************************************/
+  goTo(id) {
+    id = id;
+    this.navCtrl.push(PostPage, {
+      data: id
+    });
+  }
 
 }

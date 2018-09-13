@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Post</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-content class="cards-bg social-cards">
+    <ion-row>
+      <ion-col>
+
+        <!-- showing the post by ID-->
+        <div>
+          <ion-card>
+
+            <!-- Title of the post-->
+            <ion-card-title text-center>
+              <h2>
+                <b>{{post.title}}</b>
+              </h2>
+            </ion-card-title>
+
+            <!-- Image of the post-->
+            <img src="https://dailygeekshow.com/wp-content/uploads/2016/08/Printemps-44.jpg" />
+
+            <!-- Body of the post-->
+            <ion-card-content>
+              {{post.body}}
+            </ion-card-content>
+
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+
+</ion-content>

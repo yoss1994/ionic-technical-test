@@ -8,13 +8,15 @@
   <ion-row>
     <ion-col>
       <!-- Retriving all data from json http file-->
-      <div *ngFor="let item of data">
-        <ion-card>
+      <div *ngFor="let item of postsList">
+        <ion-card (click)="goTo(item.id)">
 
           <!-- putting the image in every post-->
           <img src="https://dailygeekshow.com/wp-content/uploads/2016/08/Printemps-44.jpg" />
           <ion-card-title text-center>
-            <h2><b>{{item.title}}</b></h2>
+            <h2>
+              <b>{{item.title}}</b>
+            </h2>
           </ion-card-title>
           <!-- Testing the body length-->
           <ion-card-content>
