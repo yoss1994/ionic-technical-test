@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Posts List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg social-cards">
+  <ion-row>
+    <ion-col>
+      <!-- Retriving all data from json http file-->
+      <div *ngFor="let item of data">
+        <ion-card>
+
+          <!-- putting the image in every post-->
+          <img src="https://dailygeekshow.com/wp-content/uploads/2016/08/Printemps-44.jpg" />
+          <ion-card-title text-center>
+            <h2><b>{{item.title}}</b></h2>
+          </ion-card-title>
+          <!-- Testing the body length-->
+          <ion-card-content>
+            <div *ngIf="item.body.length <= 200">{{item.body}}</div>
+            <div *ngIf="item.body.length >200">
+              {{ item.body | limitTo : 200 }}
+              <!-- The read more button-->
+              <div *ngIf="readmore">
+                {{ item.body }}
+              </div>
+              <button ion-button (click)="Readmore()">read more</button>
+            </div>
+          </ion-card-content>
+
+        </ion-card>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
