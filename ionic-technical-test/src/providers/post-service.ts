@@ -12,7 +12,7 @@ export class PostServiceProvider {
   /**************************** GET all posts *****************************/
   getPosts() {
 
-    return this.http.get(' https://jsonplaceholder.typicode.com/posts')
+    return this.http.get('https://jsonplaceholder.typicode.com/posts')
       .map((res) => res.json());
   }
 
@@ -23,10 +23,11 @@ export class PostServiceProvider {
       .map(res => res.json());
   }
 
-  /**************************** GET post comments *************************/
-  getPostComments(id) {
+  /***************** GET post comments using postId ***********************/
+  getPostComments(postId) {
 
-    return this.http.get('https://jsonplaceholder.typicode.com/posts/' + id + '/comments')
+    return this.http.get('https://jsonplaceholder.typicode.com/posts/'+postId+'/comments')
       .map(res => res.json());
+    
   }
 }

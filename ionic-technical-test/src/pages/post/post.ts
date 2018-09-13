@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PostServiceProvider } from '../../providers/post-service';
 
-/**
- * Generated class for the PostPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,19 +12,32 @@ export class PostPage {
 
   post = [];
   id: string;
+  CommentsNum = 0;
+  postsList = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PostService: PostServiceProvider) {
 
-    /***********************************Get the ID of the post from HomePage *********************************************/
+    /***********************************Get the ID of the post from HomePage ***********************************/
     this.id = navParams.get('data');
     this.getPost(this.id);
+    console.log("id" + this.id);
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PostPage');
+
+  /***********************************Get all the comments ****************************************************/
+  getPostComments(id) {
+    this.PostService.getPostComments(id).subscribe(posts => {
+      this.postsList = posts;
+      console.log(posts);
+    },
+      err => {
+        console.log("err!");
+      }
+    );
   }
 
-  /***********************************GetPost By ID *********************************************/
+  /*************************************GetPost By ID ********************************************************/
   getPost(id) {
 
     this.PostService.getPost(id).subscribe(post => {

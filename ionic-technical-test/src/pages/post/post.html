@@ -13,24 +13,29 @@
     <ion-row>
       <ion-col>
 
-        <!-- showing the post by ID-->
+        <!-- display post by ID-->
         <div>
           <ion-card>
 
-            <!-- Title of the post-->
+            <!--display Title of the post-->
             <ion-card-title text-center>
               <h2>
                 <b>{{post.title}}</b>
               </h2>
             </ion-card-title>
 
-            <!-- Image of the post-->
+            <!--display Image of the post-->
             <img src="https://dailygeekshow.com/wp-content/uploads/2016/08/Printemps-44.jpg" />
 
-            <!-- Body of the post-->
+            <!--display Body of the post-->
             <ion-card-content>
-              {{post.body}}
+              {{post.body}} {{CommentsNum}}
             </ion-card-content>
+
+            <!--display all the comments-->
+            <div *ngFor="let comment of postsList">
+              {{comment.name}} {{comment.email}} {{comment.body}}
+            </div>
 
           </ion-card>
         </div>

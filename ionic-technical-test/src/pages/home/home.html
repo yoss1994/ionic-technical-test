@@ -8,31 +8,54 @@
   <ion-row>
     <ion-col>
       <!-- Retriving all data from json http file-->
-      <div *ngFor="let item of postsList">
+      <div *ngFor="let item of postsList | slice:0:slice; let i=index">
         <ion-card (click)="goTo(item.id)">
 
-          <!-- putting the image in every post-->
+          <!-- display image in every post throw URL-->
           <img src="https://dailygeekshow.com/wp-content/uploads/2016/08/Printemps-44.jpg" />
+
+          <!-- display the Title-->
           <ion-card-title text-center>
             <h2>
               <b>{{item.title}}</b>
             </h2>
           </ion-card-title>
+
           <!-- Testing the body length-->
           <ion-card-content>
+
+            <!-- display all the body if its length is lower then 200-->
             <div *ngIf="item.body.length <= 200">{{item.body}}</div>
             <div *ngIf="item.body.length >200">
+
+              <!-- display the limited body if its length higher then 200-->
               {{ item.body | limitTo : 200 }}
-              <!-- The read more button-->
+
+              <!-- The read more button shown just for the length body higher then 200-->
               <div *ngIf="readmore">
+
+                <!-- display all the body if the button is clicked-->
                 {{ item.body }}
               </div>
+
+              <!-- the readmore button-->
               <button ion-button (click)="Readmore()">read more</button>
             </div>
+            <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="text"></ion-icon>
+                  <div>{{commentsNum}} Comments</div>
+                </button>
+              </ion-col>
           </ion-card-content>
 
         </ion-card>
+        
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
       </div>
     </ion-col>
+    
   </ion-row>
 </ion-content>

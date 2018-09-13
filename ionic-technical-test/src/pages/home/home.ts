@@ -16,6 +16,8 @@ export class HomePage {
   myValue: Boolean = false;
   readmore = false;
   postsList = [];
+  commentsList = [];
+  commentsNum =0;
 
   constructor(public navCtrl: NavController, public http: Http, private PostService: PostServiceProvider) {
 
@@ -33,7 +35,20 @@ export class HomePage {
   getPosts() {
     this.PostService.getPosts().subscribe(posts => {
       this.postsList = posts;
-      console.log(posts);
+      console.log("commments" +posts);
+    },
+      err => {
+        console.log("err!");
+      }
+    );
+  }
+
+  /*****************************Count the number of the comments to display it  **************************************/
+  getPostComments(id) {
+    this.PostService.getPostComments(id).subscribe(comments => {
+      this.commentsList =comments;
+      this.commentsNum=comments.length;
+      console.log(comments);
     },
       err => {
         console.log("err!");
@@ -45,7 +60,7 @@ export class HomePage {
   goTo(id) {
     id = id;
     this.navCtrl.push(PostPage, {
-      data: id
+      data: id 
     });
   }
 
